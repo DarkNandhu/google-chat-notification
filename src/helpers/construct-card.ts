@@ -4,7 +4,7 @@ import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
 import { FixedFooter, PrimaryButton, SecondaryButton } from "../elements/fixed-footer";
 
-class ConstructCard {
+export class ConstructCard {
   inputJson: Record<string, any>;
 
   constructor(inputJson: Record<string, any>) {

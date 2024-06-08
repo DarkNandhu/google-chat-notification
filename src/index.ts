@@ -1,5 +1,6 @@
 import core from "@actions/core"
 import axios from "axios";
+import { ConstructCard } from "./helpers/construct-card";
 
 
 async function run() {
@@ -14,14 +15,16 @@ async function run() {
 
     const payload: Record<string, any> = {
       cards: [
-        {
-          'title': title,
-          'creator_name': creator,
-          'asset_url': assetUrl,
-          'body': description,
-          'job_status': jobStatus,
-          'commit_id': commitId
-        }
+        new ConstructCard(
+          {
+            'title': title,
+            'creator_name': creator,
+            'asset_url': assetUrl,
+            'body': description,
+            'job_status': jobStatus,
+            'commit_id': commitId
+          }
+        ).get()
       ]
     };
 
