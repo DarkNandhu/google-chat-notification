@@ -3,6 +3,8 @@ import * as github from "@actions/github";
 import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
 import { FixedFooter, FooterButton } from "../elements/fixed-footer";
+import { ButtonList } from "../elements/button-list";
+import { Button } from "../elements/button";
 
 export class ConstructCard {
   inputJson: Record<string, any>;
@@ -15,42 +17,7 @@ export class ConstructCard {
     return {
       ...this.header(),
       ...this.getBodySections(),
-      ...this.getFooter(),
     };
-  }
-
-  getFooter(): Record<string, any> {
-    const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`
-    return new FixedFooter(
-      new FooterButton(
-        "Go to repo",
-        {
-          "red": 0,
-          "green": 0.5,
-          "blue": 1,
-          "alpha": 1
-        },
-        {
-          openLink: {
-            url: `https://github.com/${repoPath}`
-          }
-        }
-      ),
-      new FooterButton(
-        "Download APK",
-         {
-          "red": 0,
-          "green": 0.5,
-          "blue": 0,
-          "alpha": 1,
-        },
-        {
-          openLink: {
-            url: this.inputJson.asset_url
-          }
-        }
-      )
-    ).json()
   }
 
   getBodySections(): Record<string, any> {
@@ -70,6 +37,27 @@ export class ConstructCard {
     sections.addSectionItem(
       new SectionItem("Commit Id", true, 1, [
         new Paragraph(this.inputJson.commit_id || github.context.sha),
+      ])
+    );
+
+    sections.addSectionItem(
+      new SectionItem("", false, 0, [
+        new ButtonList([
+          new Button(
+            "Open Repo",
+            {
+              red: 0.5,
+              green: 0,
+              blue: 1,
+              alpha: 1,
+            },
+            {
+              openLink: {
+                url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
+              },
+            }
+          ),
+        ]),
       ])
     );
 
