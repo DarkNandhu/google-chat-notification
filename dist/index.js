@@ -232,7 +232,7 @@ class ConstructCard {
             new paragraph_1.Paragraph(this.inputJson.creator_name || github.context.actor),
         ]));
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(this.inputJson.commit_id),
+            new paragraph_1.Paragraph(this.inputJson.commit_id || github.context.sha),
         ]));
         return sections.json();
     }

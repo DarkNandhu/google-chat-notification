@@ -69,7 +69,7 @@ export class ConstructCard {
 
     sections.addSectionItem(
       new SectionItem("Commit Id", true, 1, [
-        new Paragraph(this.inputJson.commit_id),
+        new Paragraph(this.inputJson.commit_id || github.context.sha),
       ])
     );
 
