@@ -76,8 +76,8 @@ export class FixedFooter implements CardElement {
  json(): Record<any, any> {
    return {
      fixedFooter: {
-       primaryButton: this.primaryButton,
-       secondaryButton: this.secondaryButton
+       primaryButton: this.primaryButton.json(),
+       secondaryButton: this.secondaryButton.json()
      }
    }
  }
