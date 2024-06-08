@@ -31,8 +31,8 @@ async function run() {
       ]
     };
 
-
-    await axios.post(webhookUrl, payload);
+console.log(JSON.stringify(payload))
+    // await axios.post(webhookUrl, payload);
     core.info('Notification sent successfully.');
   } catch (error: any) {
     core.setFailed(`Action failed with error: ${error}`);
