@@ -207,19 +207,32 @@ class ConstructCard {
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.commit_id || github.context.sha),
         ]));
+        const buttonList = new button_list_1.ButtonList([
+            new button_1.Button("Open Repo", {
+                red: 0.5,
+                green: 0,
+                blue: 1,
+                alpha: 1,
+            }, {
+                openLink: {
+                    url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
+                },
+            }),
+        ]);
+        if (this.inputJson.asset_url) {
+            buttonList.addButton(new button_1.Button("Download APK", {
+                red: 0,
+                green: 0.5,
+                blue: 0,
+                alpha: 1,
+            }, {
+                openLink: {
+                    url: this.inputJson.asset_url,
+                },
+            }));
+        }
         sections.addSectionItem(new section_1.SectionItem("", false, 0, [
-            new button_list_1.ButtonList([
-                new button_1.Button("Open Repo", {
-                    red: 0.5,
-                    green: 0,
-                    blue: 1,
-                    alpha: 1,
-                }, {
-                    openLink: {
-                        url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
-                    },
-                }),
-            ]),
+            buttonList
         ]));
         return sections.json();
     }

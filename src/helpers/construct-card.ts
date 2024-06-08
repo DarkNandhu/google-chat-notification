@@ -40,24 +40,44 @@ export class ConstructCard {
       ])
     );
 
+    const buttonList = new ButtonList([
+      new Button(
+        "Open Repo",
+        {
+          red: 0.5,
+          green: 0,
+          blue: 1,
+          alpha: 1,
+        },
+        {
+          openLink: {
+            url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
+          },
+        }
+      ),
+    ]);
+
+    if(this.inputJson.asset_url) {
+      buttonList.addButton(
+        new Button(
+          "Download APK",
+          {
+            red: 0,
+            green: 0.5,
+            blue: 0,
+            alpha: 1,
+          },
+          {
+            openLink: {
+              url: this.inputJson.asset_url,
+            },
+          }
+        )
+      );
+    }
     sections.addSectionItem(
       new SectionItem("", false, 0, [
-        new ButtonList([
-          new Button(
-            "Open Repo",
-            {
-              red: 0.5,
-              green: 0,
-              blue: 1,
-              alpha: 1,
-            },
-            {
-              openLink: {
-                url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
-              },
-            }
-          ),
-        ]),
+        buttonList
       ])
     );
 
