@@ -293,7 +293,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const webhookUrl = core.getInput('webhook-url');
-            const title = 'NA';
+            const title = core.getInput('title');
             const creator = core.getInput('creator-name');
             const assetUrl = core.getInput('asset-url');
             const description = core.getInput('description');
@@ -302,7 +302,10 @@ function run() {
             const payload = {
                 cards: [
                     new construct_card_1.ConstructCard({
-                        'title': title,
+                        'header': {
+                            'title': title,
+                            'subtitle': 'NA'
+                        },
                         'creator_name': creator,
                         'asset_url': assetUrl,
                         'body': description,

@@ -5,9 +5,8 @@ import { ConstructCard } from "./helpers/construct-card";
 
 async function run() {
   try {
-
     const webhookUrl = core.getInput('webhook-url');
-    const title =  'NA';
+    const title = core.getInput('title');
     const creator = core.getInput('creator-name');
     const assetUrl = core.getInput('asset-url');
     const description = core.getInput('description');
@@ -18,7 +17,10 @@ async function run() {
       cards: [
         new ConstructCard(
           {
-            'title': title,
+            'header': {
+              'title': title,
+              'subtitle': 'NA'
+            },
             'creator_name': creator,
             'asset_url': assetUrl,
             'body': description,
