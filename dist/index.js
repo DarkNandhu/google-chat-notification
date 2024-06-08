@@ -315,7 +315,7 @@ function run() {
             core.info('Notification sent successfully.');
         }
         catch (error) {
-            core.setFailed(`Action failed with error: ${error.message}`);
+            core.setFailed(`Action failed with error: ${error}`);
         }
     });
 }
