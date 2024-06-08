@@ -294,7 +294,7 @@ function run() {
         try {
             core.setCommandEcho(true);
             const webhookUrl = core.getInput('webhook-url');
-            const title = core.getInput('title');
+            const title = core.getInput('title') || 'NA';
             const creator = core.getInput('creator-name');
             const assetUrl = core.getInput('asset-url');
             const description = core.getInput('description');
