@@ -15,6 +15,7 @@
     "axios": "^1.7.2"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
     "typescript": "^5.4.5"
   }
 }
