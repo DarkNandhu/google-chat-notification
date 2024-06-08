@@ -207,6 +207,9 @@ class ConstructCard {
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.commit_id || github.context.sha),
         ]));
+        sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
+            new paragraph_1.Paragraph(github.context.ref),
+        ]));
         const buttonList = new button_list_1.ButtonList([
             new button_1.Button("Open Repo", {
                 red: 0.5,

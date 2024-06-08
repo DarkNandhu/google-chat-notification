@@ -39,6 +39,12 @@ export class ConstructCard {
       ])
     );
 
+    sections.addSectionItem(
+      new SectionItem("Branch", true, 1, [
+        new Paragraph(github.context.ref),
+      ])
+    );
+
     const buttonList = new ButtonList([
       new Button(
         "Open Repo",
