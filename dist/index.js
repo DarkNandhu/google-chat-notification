@@ -163,13 +163,33 @@ exports.Sections = Sections;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ConstructCard = void 0;
 const header_1 = __nccwpck_require__(9938);
-const github_1 = __importDefault(__nccwpck_require__(5438));
+const github = __importStar(__nccwpck_require__(5438));
 const section_1 = __nccwpck_require__(6430);
 const paragraph_1 = __nccwpck_require__(6465);
 const fixed_footer_1 = __nccwpck_require__(8885);
@@ -181,7 +201,7 @@ class ConstructCard {
         return Object.assign(Object.assign(Object.assign({}, this.header()), this.getBodySections()), this.getFooter());
     }
     getFooter() {
-        const repoPath = `${github_1.default.context.repo.owner}/${github_1.default.context.repo.repo}`;
+        const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
         return new fixed_footer_1.FixedFooter(new fixed_footer_1.PrimaryButton("Go to repo", {
             "red": 0,
             "green": 0.5,
@@ -209,7 +229,7 @@ class ConstructCard {
             sections.addSectionItem(new section_1.SectionItem("", false, 0, [paragraph]));
         }
         sections.addSectionItem(new section_1.SectionItem("Creator", true, 1, [
-            new paragraph_1.Paragraph(this.inputJson.creator_name || github_1.default.context.actor),
+            new paragraph_1.Paragraph(this.inputJson.creator_name || github.context.actor),
         ]));
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.commit_id),
@@ -217,7 +237,7 @@ class ConstructCard {
         return sections.json();
     }
     header() {
-        return new header_1.Header(this.inputJson.header.title || github_1.default.context.repo.repo, this.inputJson.header.subtitle || "", "https://developers.google.com/chat/images/quickstart-app-avatar.png", "CIRCLE").json();
+        return new header_1.Header(this.inputJson.header.title || github.context.repo.repo, this.inputJson.header.subtitle || "", "https://developers.google.com/chat/images/quickstart-app-avatar.png", "CIRCLE").json();
     }
 }
 exports.ConstructCard = ConstructCard;
@@ -230,6 +250,29 @@ exports.ConstructCard = ConstructCard;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -243,19 +286,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __importDefault(__nccwpck_require__(2186));
+const core = __importStar(__nccwpck_require__(2186));
 const axios_1 = __importDefault(__nccwpck_require__(8757));
 const construct_card_1 = __nccwpck_require__(3377);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const webhookUrl = core_1.default.getInput('webhook-url');
-            const title = core_1.default.getInput('title');
-            const creator = core_1.default.getInput('creator-name');
-            const assetUrl = core_1.default.getInput('asset-url');
-            const description = core_1.default.getInput('description');
-            const jobStatus = core_1.default.getInput('job-status');
-            const commitId = core_1.default.getInput('commit-id');
+            const webhookUrl = core.getInput('webhook-url');
+            const title = core.getInput('title');
+            const creator = core.getInput('creator-name');
+            const assetUrl = core.getInput('asset-url');
+            const description = core.getInput('description');
+            const jobStatus = core.getInput('job-status');
+            const commitId = core.getInput('commit-id');
             const payload = {
                 cards: [
                     new construct_card_1.ConstructCard({
@@ -269,10 +312,10 @@ function run() {
                 ]
             };
             yield axios_1.default.post(webhookUrl, payload);
-            core_1.default.info('Notification sent successfully.');
+            core.info('Notification sent successfully.');
         }
         catch (error) {
-            core_1.default.setFailed(`Action failed with error: ${error.message}`);
+            core.setFailed(`Action failed with error: ${error.message}`);
         }
     });
 }
