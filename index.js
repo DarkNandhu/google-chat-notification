@@ -18,50 +18,63 @@ async function run() {
           header: {
             title: title,
           },
-          // sections: [
-          //   {
-          //     widgets: [
-          //       {
-          //         keyValue: {
-          //           topLabel: "Creator",
-          //           content: creator
-          //         }
-          //       },
-          //       {
-          //         keyValue: {
-          //           topLabel: "Body",
-          //           content: body
-          //         }
-          //       },
-          //       {
-          //         keyValue: {
-          //           topLabel: "Job Status",
-          //           content: jobStatus
-          //         }
-          //       },
-          //       {
-          //         keyValue: {
-          //           topLabel: "Commit ID",
-          //           content: commitId
-          //         }
-          //       },
-          //       {
-          //         buttons: [
-          //           {
-          //             textButton: {
-          //               text: "Download APK",
-          //               onClick: {
-          //                 openLink: {
-          //                   url: apkUrl
-          //                 }
-          //               }
-          //             }
-          //           }
-          //         ]
-          //       }
-          //     ]
-          //   }
-          // ]
+          sections: [
+            creator && {
+              widgets: [
+                {
+                  keyValue: {
+                    topLabel: "Creator",
+                    content: creator
+                  }
+                }
+              ]
+            },
+            body && {
+              widgets: [
+                {
+                  keyValue: {
+                    topLabel: "Body",
+                    content: body
+                  }
+                }
+              ]
+            },
+            jobStatus && {
+              widgets: [
+                {
+                  keyValue: {
+                    topLabel: "Job Status",
+                    content: jobStatus
+                  }
+                }
+              ]
+            },
+            commitId && {
+              widgets: [
+                {
+                  keyValue: {
+                    topLabel: "Commit ID",
+                    content: commitId
+                  }
+                }
+              ]
+            },
+            apkUrl && {
+              buttons: [
+                {
+                  textButton: {
+                    text: "Download APK",
+                    onClick: {
+                      openLink: {
+                        url: apkUrl
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+            .filter(Boolean)
         }
       ]
     };
