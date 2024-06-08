@@ -17,52 +17,51 @@ async function run() {
         {
           header: {
             title: title,
-            imageUrl: iconUrl
           },
-          sections: [
-            {
-              widgets: [
-                {
-                  keyValue: {
-                    topLabel: "Creator",
-                    content: creator
-                  }
-                },
-                {
-                  keyValue: {
-                    topLabel: "Body",
-                    content: body
-                  }
-                },
-                {
-                  keyValue: {
-                    topLabel: "Job Status",
-                    content: jobStatus
-                  }
-                },
-                {
-                  keyValue: {
-                    topLabel: "Commit ID",
-                    content: commitId
-                  }
-                },
-                {
-                  buttons: [
-                    {
-                      textButton: {
-                        text: "Download APK",
-                        onClick: {
-                          openLink: {
-                            url: apkUrl
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          // sections: [
+          //   {
+          //     widgets: [
+          //       {
+          //         keyValue: {
+          //           topLabel: "Creator",
+          //           content: creator
+          //         }
+          //       },
+          //       {
+          //         keyValue: {
+          //           topLabel: "Body",
+          //           content: body
+          //         }
+          //       },
+          //       {
+          //         keyValue: {
+          //           topLabel: "Job Status",
+          //           content: jobStatus
+          //         }
+          //       },
+          //       {
+          //         keyValue: {
+          //           topLabel: "Commit ID",
+          //           content: commitId
+          //         }
+          //       },
+          //       {
+          //         buttons: [
+          //           {
+          //             textButton: {
+          //               text: "Download APK",
+          //               onClick: {
+          //                 openLink: {
+          //                   url: apkUrl
+          //                 }
+          //               }
+          //             }
+          //           }
+          //         ]
+          //       }
+          //     ]
+          //   }
+          // ]
         }
       ]
     };
