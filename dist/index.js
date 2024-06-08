@@ -311,7 +311,7 @@ function run() {
                 'commit_id': commitId || 'NA'
             }).get());
             console.log(JSON.stringify(payload));
-            yield axios_1.default.post(webhookUrl, JSON.stringify(payload));
+            yield axios_1.default.post(webhookUrl, payload);
             core.info('Notification sent successfully.');
         }
         catch (error) {
