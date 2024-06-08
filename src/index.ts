@@ -25,7 +25,7 @@ async function run() {
               asset_url: assetUrl || "NA",
               body: description || "NA",
               job_status: jobStatus || "NA",
-              commit_id: commitId || "NA",
+              commit_id: commitId,
             }).get(),
           },
         },
