@@ -18,21 +18,23 @@ async function run() {
         new ConstructCard(
           {
             'header': {
-              'title': title,
+              'title': title || 'NA',
               'subtitle': 'NA'
             },
-            'creator_name': creator,
-            'asset_url': assetUrl,
-            'body': description,
-            'job_status': jobStatus,
-            'commit_id': commitId
+            'creator_name': creator || 'NA',
+            'asset_url': assetUrl || 'NA',
+            'body': description || 'NA',
+            'job_status': jobStatus || 'NA',
+            'commit_id': commitId || 'NA'
           }
         ).get()
       ]
     };
 
-    await axios.post(webhookUrl, payload);
-    core.info('Notification sent successfully.');
+    console.log(JSON.stringify(payload))
+
+    // await axios.post(webhookUrl, payload);
+    // core.info('Notification sent successfully.');
   } catch (error: any) {
     core.setFailed(`Action failed with error: ${error}`);
   }

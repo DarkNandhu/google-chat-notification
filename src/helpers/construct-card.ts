@@ -50,7 +50,7 @@ export class ConstructCard {
           }
         }
       )
-    )
+    ).json()
   }
 
   getBodySections(): Record<string, any> {
