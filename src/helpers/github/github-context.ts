@@ -10,6 +10,13 @@ export class GithubContext {
     this.githubContext = github.context;
   }
 
+  status(): string {
+    if(GithubContext.isGithubEnv) {
+      return this.githubContext.job
+    }
+    return "success"
+  }
+
    actor(): string {
     if(GithubContext.isGithubEnv) {
       return this.githubContext.actor

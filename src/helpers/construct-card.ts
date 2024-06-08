@@ -5,6 +5,14 @@ import { ButtonList } from "../elements/button-list";
 import { Button } from "../elements/button";
 import { DecoratedText } from "../elements/decorated-text";
 import { GithubContext } from "./github/github-context";
+import {
+  statusColor,
+  StatusColorKey,
+  statusImage,
+  StatusImageKey,
+  statusMessage,
+  StatusMessageKey,
+} from "./success-indication";
 
 const branchIconUrl =
   "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
@@ -28,9 +36,28 @@ export class ConstructCard {
   getBodySections(): Record<string, any> {
     let sections: Sections = new Sections([]);
 
+    if (this.githubContext.status()) {
+      const jobStatus: string = this.githubContext.status();
+      let decoratedText = new DecoratedText(
+        `<font color="${statusColor[jobStatus as StatusColorKey]}">${
+          statusMessage[jobStatus as StatusMessageKey]
+        }</font>`,
+        {
+          startIcon: {
+            iconUrl: statusImage[jobStatus as StatusImageKey],
+          },
+        }
+      );
+      sections.addSectionItem(
+        new SectionItem("Status", false, 0, [decoratedText])
+      );
+    }
+
     if (this.inputJson.body) {
       let paragraph = new Paragraph(this.inputJson.body);
-      sections.addSectionItem(new SectionItem("", false, 0, [paragraph]));
+      sections.addSectionItem(
+        new SectionItem("Description", false, 0, [paragraph])
+      );
     }
 
     sections.addSectionItem(

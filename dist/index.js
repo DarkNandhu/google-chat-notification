@@ -205,6 +205,7 @@ const button_list_1 = __nccwpck_require__(4160);
 const button_1 = __nccwpck_require__(9993);
 const decorated_text_1 = __nccwpck_require__(4681);
 const github_context_1 = __nccwpck_require__(2973);
+const success_indication_1 = __nccwpck_require__(9252);
 const branchIconUrl = "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
 class ConstructCard {
     constructor(inputJson) {
@@ -216,9 +217,18 @@ class ConstructCard {
     }
     getBodySections() {
         let sections = new section_1.Sections([]);
+        if (this.githubContext.status()) {
+            const jobStatus = this.githubContext.status();
+            let decoratedText = new decorated_text_1.DecoratedText(`<font color="${success_indication_1.statusColor[jobStatus]}">${success_indication_1.statusMessage[jobStatus]}</font>`, {
+                startIcon: {
+                    iconUrl: success_indication_1.statusImage[jobStatus],
+                },
+            });
+            sections.addSectionItem(new section_1.SectionItem("Status", false, 0, [decoratedText]));
+        }
         if (this.inputJson.body) {
             let paragraph = new paragraph_1.Paragraph(this.inputJson.body);
-            sections.addSectionItem(new section_1.SectionItem("", false, 0, [paragraph]));
+            sections.addSectionItem(new section_1.SectionItem("Description", false, 0, [paragraph]));
         }
         sections.addSectionItem(new section_1.SectionItem("Creator", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.creator_name || this.githubContext.actor()),
@@ -321,6 +331,12 @@ class GithubContext {
     constructor() {
         this.githubContext = github.context;
     }
+    status() {
+        if (GithubContext.isGithubEnv) {
+            return this.githubContext.job;
+        }
+        return "success";
+    }
     actor() {
         if (GithubContext.isGithubEnv) {
             return this.githubContext.actor;
@@ -353,6 +369,29 @@ class GithubContext {
     }
 }
 exports.GithubContext = GithubContext;
+
+
+/***/ }),
+
+/***/ 9252:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.statusMessage = exports.statusImage = exports.statusColor = void 0;
+exports.statusColor = {
+    success: '#31AF91',
+    failure: '#FF0B0B'
+};
+exports.statusImage = {
+    success: 'https://raw.githubusercontent.com/xseededucation/action_assets/master/success-128.png',
+    failure: 'https://raw.githubusercontent.com/xseededucation/action_assets/master/failure-128.png'
+};
+exports.statusMessage = {
+    success: 'Run was successful',
+    failure: 'Run failed'
+};
 
 
 /***/ }),
