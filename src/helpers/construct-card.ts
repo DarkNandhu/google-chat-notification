@@ -36,9 +36,9 @@ export class ConstructCard {
 
   getBodySections(): Record<string, any> {
     let sections: Sections = new Sections([]);
-    core.info(`this is the status ${this.githubContext.status()}`);
-    if (this.githubContext.status()) {
-      const jobStatus: string = this.githubContext.status();
+    core.info(`this is the status ${this.inputJson.job_status}`);
+    if (this.inputJson.job_status) {
+      const jobStatus: string = this.inputJson.job_status;
       let decoratedText = new DecoratedText(
         `<font color="${statusColor[jobStatus as StatusColorKey]}">${
           statusMessage[jobStatus as StatusMessageKey]

@@ -241,9 +241,9 @@ class ConstructCard {
     }
     getBodySections() {
         let sections = new section_1.Sections([]);
-        core.info(`this is the status ${this.githubContext.status()}`);
-        if (this.githubContext.status()) {
-            const jobStatus = this.githubContext.status();
+        core.info(`this is the status ${this.inputJson.job_status}`);
+        if (this.inputJson.job_status) {
+            const jobStatus = this.inputJson.job_status;
             let decoratedText = new decorated_text_1.DecoratedText(`<font color="${success_indication_1.statusColor[jobStatus]}">${success_indication_1.statusMessage[jobStatus]}</font>`, {
                 startIcon: {
                     iconUrl: success_indication_1.statusImage[jobStatus],
