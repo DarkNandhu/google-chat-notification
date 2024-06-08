@@ -7,8 +7,8 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FixedFooter = exports.SecondaryButton = exports.PrimaryButton = void 0;
-class PrimaryButton {
+exports.FixedFooter = exports.FooterButton = void 0;
+class FooterButton {
     constructor(text, color, onClick) {
         this.text = text;
         this.color = color;
@@ -16,32 +16,13 @@ class PrimaryButton {
     }
     json() {
         return {
-            primaryButton: {
-                text: this.text,
-                color: this.color,
-                onClick: this.onClick
-            }
+            text: this.text,
+            color: this.color,
+            onClick: this.onClick
         };
     }
 }
-exports.PrimaryButton = PrimaryButton;
-class SecondaryButton {
-    constructor(text, color, onClick) {
-        this.text = text;
-        this.color = color;
-        this.onClick = onClick;
-    }
-    json() {
-        return {
-            secondaryButton: {
-                text: this.text,
-                color: this.color,
-                onClick: this.onClick
-            }
-        };
-    }
-}
-exports.SecondaryButton = SecondaryButton;
+exports.FooterButton = FooterButton;
 class FixedFooter {
     constructor(primaryButton, secondaryButton) {
         this.primaryButton = primaryButton;
@@ -202,7 +183,7 @@ class ConstructCard {
     }
     getFooter() {
         const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
-        return new fixed_footer_1.FixedFooter(new fixed_footer_1.PrimaryButton("Go to repo", {
+        return new fixed_footer_1.FixedFooter(new fixed_footer_1.FooterButton("Go to repo", {
             "red": 0,
             "green": 0.5,
             "blue": 1,
@@ -211,7 +192,7 @@ class ConstructCard {
             openLink: {
                 url: `https://github.com/${repoPath}`
             }
-        }), new fixed_footer_1.SecondaryButton("Download APK", {
+        }), new fixed_footer_1.FooterButton("Download APK", {
             "red": 0,
             "green": 0.5,
             "blue": 0,

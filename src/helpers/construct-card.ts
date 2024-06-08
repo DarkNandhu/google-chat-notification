@@ -2,7 +2,7 @@ import { Header } from "../elements/header";
 import * as github from "@actions/github";
 import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
-import { FixedFooter, PrimaryButton, SecondaryButton } from "../elements/fixed-footer";
+import { FixedFooter, FooterButton } from "../elements/fixed-footer";
 
 export class ConstructCard {
   inputJson: Record<string, any>;
@@ -22,7 +22,7 @@ export class ConstructCard {
   getFooter(): Record<string, any> {
     const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`
     return new FixedFooter(
-      new PrimaryButton(
+      new FooterButton(
         "Go to repo",
         {
           "red": 0,
@@ -36,7 +36,7 @@ export class ConstructCard {
           }
         }
       ),
-      new SecondaryButton(
+      new FooterButton(
         "Download APK",
          {
           "red": 0,
