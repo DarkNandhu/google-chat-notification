@@ -1,14 +1,42 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8885:
+/***/ 4160:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FixedFooter = exports.FooterButton = void 0;
-class FooterButton {
+exports.ButtonList = void 0;
+class ButtonList {
+    constructor(buttons) {
+        this.buttons = [];
+        this.buttons = buttons;
+    }
+    addButton(button) {
+        this.buttons.push(button);
+    }
+    json() {
+        return {
+            buttonList: {
+                buttons: this.buttons.map(widget => widget.json())
+            }
+        };
+    }
+}
+exports.ButtonList = ButtonList;
+
+
+/***/ }),
+
+/***/ 9993:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Button = void 0;
+class Button {
     constructor(text, color, onClick) {
         this.text = text;
         this.color = color;
@@ -22,22 +50,7 @@ class FooterButton {
         };
     }
 }
-exports.FooterButton = FooterButton;
-class FixedFooter {
-    constructor(primaryButton, secondaryButton) {
-        this.primaryButton = primaryButton;
-        this.secondaryButton = secondaryButton;
-    }
-    json() {
-        return {
-            fixedFooter: {
-                primaryButton: this.primaryButton.json(),
-                secondaryButton: this.secondaryButton.json()
-            }
-        };
-    }
-}
-exports.FixedFooter = FixedFooter;
+exports.Button = Button;
 
 
 /***/ }),
@@ -173,35 +186,14 @@ const header_1 = __nccwpck_require__(9938);
 const github = __importStar(__nccwpck_require__(5438));
 const section_1 = __nccwpck_require__(6430);
 const paragraph_1 = __nccwpck_require__(6465);
-const fixed_footer_1 = __nccwpck_require__(8885);
+const button_list_1 = __nccwpck_require__(4160);
+const button_1 = __nccwpck_require__(9993);
 class ConstructCard {
     constructor(inputJson) {
         this.inputJson = inputJson;
     }
     get() {
-        return Object.assign(Object.assign(Object.assign({}, this.header()), this.getBodySections()), this.getFooter());
-    }
-    getFooter() {
-        const repoPath = `${github.context.repo.owner}/${github.context.repo.repo}`;
-        return new fixed_footer_1.FixedFooter(new fixed_footer_1.FooterButton("Go to repo", {
-            "red": 0,
-            "green": 0.5,
-            "blue": 1,
-            "alpha": 1
-        }, {
-            openLink: {
-                url: `https://github.com/${repoPath}`
-            }
-        }), new fixed_footer_1.FooterButton("Download APK", {
-            "red": 0,
-            "green": 0.5,
-            "blue": 0,
-            "alpha": 1,
-        }, {
-            openLink: {
-                url: this.inputJson.asset_url
-            }
-        })).json();
+        return Object.assign(Object.assign({}, this.header()), this.getBodySections());
     }
     getBodySections() {
         let sections = new section_1.Sections([]);
@@ -214,6 +206,20 @@ class ConstructCard {
         ]));
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.commit_id || github.context.sha),
+        ]));
+        sections.addSectionItem(new section_1.SectionItem("", false, 0, [
+            new button_list_1.ButtonList([
+                new button_1.Button("Open Repo", {
+                    red: 0.5,
+                    green: 0,
+                    blue: 1,
+                    alpha: 1,
+                }, {
+                    openLink: {
+                        url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
+                    },
+                }),
+            ]),
         ]));
         return sections.json();
     }
