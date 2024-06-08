@@ -12,6 +12,7 @@ async function run() {
     const description = core.getInput("description");
     const jobStatus = core.getInput("job-status");
     const commitId = core.getInput("commit-id");
+    const subtitle = core.getInput("subtitle");
 
     const payload: Record<string, any> = {
       cardsV2: [
@@ -20,7 +21,7 @@ async function run() {
             ...new ConstructCard({
               header: {
                 title: title || "NA",
-                subtitle: "NA",
+                subtitle: subtitle || "",
               },
               creator_name: creator || "NA",
               asset_url: assetUrl,

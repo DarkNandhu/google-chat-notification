@@ -451,13 +451,14 @@ function run() {
             const description = core.getInput("description");
             const jobStatus = core.getInput("job-status");
             const commitId = core.getInput("commit-id");
+            const subtitle = core.getInput("subtitle");
             const payload = {
                 cardsV2: [
                     {
                         card: Object.assign({}, new construct_card_1.ConstructCard({
                             header: {
                                 title: title || "NA",
-                                subtitle: "NA",
+                                subtitle: subtitle || "",
                             },
                             creator_name: creator || "NA",
                             asset_url: assetUrl,
