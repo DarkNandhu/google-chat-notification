@@ -4,24 +4,16 @@ inputs:
   webhook-url:
     description: 'The Google Chat webhook URL'
     required: true
-  creator:
+  creator-name:
     description: 'The creator of the message'
     required: true
-  apk-url:
-    description: 'The URL to download the APK'
-    required: true
+  asset-url:
+    description: 'The URL to download the asset'
+    required: false
   title:
     description: 'The title of the notification'
     required: false
     default: 'Notification'
-  icon-url:
-    description: 'The URL of the icon to display'
-    required: false
-    default: ''
-  body:
-    description: 'The body of the notification'
-    required: false
-    default: ''
   job-status:
     description: 'The status of the job'
     required: false
@@ -30,6 +22,10 @@ inputs:
     description: 'The commit ID'
     required: false
     default: ''
+  description:
+    description: 'this will be the description of the notification'
+    required: false
+    default: ''
 runs:
   using: 'node20'
-  main: 'index.js'
+  main: 'dist/index.js'
