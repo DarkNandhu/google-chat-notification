@@ -2,7 +2,6 @@ import { Header } from "../elements/header";
 import * as github from "@actions/github";
 import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
-import { FixedFooter, FooterButton } from "../elements/fixed-footer";
 import { ButtonList } from "../elements/button-list";
 import { Button } from "../elements/button";
 
