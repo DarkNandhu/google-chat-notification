@@ -241,7 +241,7 @@ class ConstructCard {
             commitUrl = "https://xseededucation.com";
         }
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(`<a href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
+            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
         ]));
         let branchUrl = "";
         if (github_context_1.GithubContext.isGithubEnv) {
@@ -251,7 +251,7 @@ class ConstructCard {
             branchUrl = "https://xseededucation.com";
         }
         sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
-            new decorated_text_1.DecoratedText(`<a href=${branchUrl}>${this.githubContext.ref()}</a>`, {
+            new decorated_text_1.DecoratedText(`<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref()}</a>`, {
                 startIcon: {
                     iconUrl: branchIconUrl,
                 },
@@ -462,7 +462,7 @@ function run() {
                             },
                             creator_name: creator || "NA",
                             asset_url: assetUrl,
-                            body: description || "NA",
+                            body: description || "",
                             job_status: jobStatus || "NA",
                             commit_id: commitId,
                         }).get()),

@@ -14,6 +14,10 @@ inputs:
     description: 'The title of the notification'
     required: false
     default: 'Notification'
+  subtitle:
+    description: 'The subtitle of the notification'
+    required: false
+    default: 'Notification'
   job-status:
     description: 'The status of the job'
     required: false

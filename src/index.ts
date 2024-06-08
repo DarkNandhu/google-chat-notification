@@ -25,7 +25,7 @@ async function run() {
               },
               creator_name: creator || "NA",
               asset_url: assetUrl,
-              body: description || "NA",
+              body: description || "",
               job_status: jobStatus || "NA",
               commit_id: commitId,
             }).get(),

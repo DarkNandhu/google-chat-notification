@@ -77,7 +77,8 @@ export class ConstructCard {
     sections.addSectionItem(
       new SectionItem("Commit Id", true, 1, [
         new Paragraph(
-          `<a href=${commitUrl}>${
+          `<a style="text-decoration: none; color: red;" href=${commitUrl}>${
+            
             this.inputJson.commit_id || this.githubContext.sha()
           }</a>`
         ),
@@ -93,7 +94,7 @@ export class ConstructCard {
     sections.addSectionItem(
       new SectionItem("Branch", true, 1, [
         new DecoratedText(
-          `<a href=${branchUrl}>${this.githubContext.ref()}</a>`,
+          `<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref()}</a>`,
           {
             startIcon: {
               iconUrl: branchIconUrl,
