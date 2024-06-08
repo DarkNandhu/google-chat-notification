@@ -14,8 +14,7 @@ async function run() {
     const commitId = core.getInput('commit-id');
 
     const payload: Record<string, any> = {
-      cards: [
-        new ConstructCard(
+        ...new ConstructCard(
           {
             'header': {
               'title': title || 'NA',
@@ -28,11 +27,10 @@ async function run() {
             'commit_id': commitId || 'NA'
           }
         ).get()
-      ]
     };
 
-console.log(JSON.stringify(payload))
-    // await axios.post(webhookUrl, payload);
+    console.log(JSON.stringify(payload))
+    await axios.post(webhookUrl, JSON.stringify(payload));
     core.info('Notification sent successfully.');
   } catch (error: any) {
     core.setFailed(`Action failed with error: ${error}`);
