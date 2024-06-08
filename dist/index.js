@@ -293,7 +293,6 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             core.setCommandEcho(true);
-            core.setOutput('trial', core.getInput);
             const webhookUrl = core.getInput('webhook-url');
             const title = core.getInput('title');
             const creator = core.getInput('creator-name');

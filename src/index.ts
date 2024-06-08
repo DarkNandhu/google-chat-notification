@@ -6,7 +6,6 @@ import { ConstructCard } from "./helpers/construct-card";
 async function run() {
   try {
     core.setCommandEcho(true)
-    core.setOutput('trial', core.getInput)
     const webhookUrl = core.getInput('webhook-url');
     const title = core.getInput('title');
     const creator = core.getInput('creator-name');
