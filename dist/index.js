@@ -223,12 +223,25 @@ class ConstructCard {
         sections.addSectionItem(new section_1.SectionItem("Creator", true, 1, [
             new paragraph_1.Paragraph(this.inputJson.creator_name || this.githubContext.actor()),
         ]));
+        let commitUrl = "";
+        if (github_context_1.GithubContext.isGithubEnv) {
+            commitUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/commit/${this.githubContext.sha()}`;
+        }
+        else {
+            commitUrl = "https://xseededucation.com";
+        }
         sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(this.inputJson.commit_id || this.githubContext.sha()),
+            new paragraph_1.Paragraph(`<a href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
         ]));
-        const commitUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/commit/${this.githubContext.sha()}`;
+        let branchUrl = "";
+        if (github_context_1.GithubContext.isGithubEnv) {
+            branchUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/tree/${this.githubContext.ref()}`;
+        }
+        else {
+            branchUrl = "https://xseededucation.com";
+        }
         sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
-            new decorated_text_1.DecoratedText(`<a href="${commitUrl}">${this.githubContext.ref()}</a>`, {
+            new decorated_text_1.DecoratedText(`<a href=${branchUrl}>${this.githubContext.ref()}</a>`, {
                 startIcon: {
                     iconUrl: branchIconUrl,
                 },
