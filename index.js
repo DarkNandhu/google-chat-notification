@@ -29,50 +29,50 @@ async function run() {
                 }
               ]
             },
-            body && {
-              widgets: [
-                {
-                  keyValue: {
-                    topLabel: "Body",
-                    content: body
-                  }
-                }
-              ]
-            },
-            jobStatus && {
-              widgets: [
-                {
-                  keyValue: {
-                    topLabel: "Job Status",
-                    content: jobStatus
-                  }
-                }
-              ]
-            },
-            commitId && {
-              widgets: [
-                {
-                  keyValue: {
-                    topLabel: "Commit ID",
-                    content: commitId
-                  }
-                }
-              ]
-            },
-            apkUrl && {
-              buttons: [
-                {
-                  textButton: {
-                    text: "Download APK",
-                    onClick: {
-                      openLink: {
-                        url: apkUrl
-                      }
-                    }
-                  }
-                }
-              ]
-            }
+            // body && {
+            //   widgets: [
+            //     {
+            //       keyValue: {
+            //         topLabel: "Body",
+            //         content: body
+            //       }
+            //     }
+            //   ]
+            // },
+            // jobStatus && {
+            //   widgets: [
+            //     {
+            //       keyValue: {
+            //         topLabel: "Job Status",
+            //         content: jobStatus
+            //       }
+            //     }
+            //   ]
+            // },
+            // commitId && {
+            //   widgets: [
+            //     {
+            //       keyValue: {
+            //         topLabel: "Commit ID",
+            //         content: commitId
+            //       }
+            //     }
+            //   ]
+            // },
+            // apkUrl && {
+            //   buttons: [
+            //     {
+            //       textButton: {
+            //         text: "Download APK",
+            //         onClick: {
+            //           openLink: {
+            //             url: apkUrl
+            //           }
+            //         }
+            //       }
+            //     }
+            //   ]
+            // }
           ]
             .filter(Boolean)
         }
