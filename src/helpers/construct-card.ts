@@ -13,6 +13,7 @@ import {
   statusMessage,
   StatusMessageKey,
 } from "./success-indication";
+import * as core from "@actions/core";
 
 const branchIconUrl =
   "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
@@ -35,7 +36,7 @@ export class ConstructCard {
 
   getBodySections(): Record<string, any> {
     let sections: Sections = new Sections([]);
-
+    core.info(`this is the status ${this.githubContext.status()}`);
     if (this.githubContext.status()) {
       const jobStatus: string = this.githubContext.status();
       let decoratedText = new DecoratedText(
