@@ -55,6 +55,43 @@ exports.Button = Button;
 
 /***/ }),
 
+/***/ 4681:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DecoratedText = void 0;
+class DecoratedText {
+    constructor(text, { startIcon, icon, topLabel, bottomLabel, } = {}) {
+        this.startIcon = startIcon;
+        this.icon = icon;
+        this.topLabel = topLabel;
+        this.text = text;
+        this.bottomLabel = bottomLabel;
+    }
+    json() {
+        let jsonToUse = {};
+        if (this.startIcon) {
+            jsonToUse['startIcon'] = this.startIcon;
+        }
+        if (this.icon) {
+            jsonToUse['icon'] = this.icon;
+        }
+        if (this.topLabel) {
+            jsonToUse['topLabel'] = this.topLabel;
+        }
+        if (this.bottomLabel) {
+            jsonToUse['bottomLabel'] = this.bottomLabel;
+        }
+        return Object.assign(Object.assign({}, jsonToUse), { text: this.text });
+    }
+}
+exports.DecoratedText = DecoratedText;
+
+
+/***/ }),
+
 /***/ 9938:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -188,6 +225,8 @@ const section_1 = __nccwpck_require__(6430);
 const paragraph_1 = __nccwpck_require__(6465);
 const button_list_1 = __nccwpck_require__(4160);
 const button_1 = __nccwpck_require__(9993);
+const decorated_text_1 = __nccwpck_require__(4681);
+const branchIconUrl = "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
 class ConstructCard {
     constructor(inputJson) {
         this.inputJson = inputJson;
@@ -208,7 +247,11 @@ class ConstructCard {
             new paragraph_1.Paragraph(this.inputJson.commit_id || github.context.sha),
         ]));
         sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
-            new paragraph_1.Paragraph(github.context.ref),
+            new decorated_text_1.DecoratedText(github.context.ref, {
+                startIcon: {
+                    iconUrl: branchIconUrl,
+                },
+            }),
         ]));
         const buttonList = new button_list_1.ButtonList([
             new button_1.Button("Open Repo", {
@@ -234,13 +277,11 @@ class ConstructCard {
                 },
             }));
         }
-        sections.addSectionItem(new section_1.SectionItem("", false, 0, [
-            buttonList
-        ]));
+        sections.addSectionItem(new section_1.SectionItem("", false, 0, [buttonList]));
         return sections.json();
     }
     header() {
-        return new header_1.Header(this.inputJson.header.title || github.context.repo.repo, this.inputJson.header.subtitle || "", "https://developers.google.com/chat/images/quickstart-app-avatar.png", "CIRCLE").json();
+        return new header_1.Header(this.inputJson.header.title || github.context.repo.repo, this.inputJson.header.subtitle || "", "https://raw.githubusercontent.com/xseededucation/action_assets/master/29.webp", "CIRCLE").json();
     }
 }
 exports.ConstructCard = ConstructCard;

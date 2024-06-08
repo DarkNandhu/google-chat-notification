@@ -4,6 +4,10 @@ import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
 import { ButtonList } from "../elements/button-list";
 import { Button } from "../elements/button";
+import { DecoratedText } from "../elements/decorated-text";
+
+const branchIconUrl =
+  "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
 
 export class ConstructCard {
   inputJson: Record<string, any>;
@@ -41,7 +45,11 @@ export class ConstructCard {
 
     sections.addSectionItem(
       new SectionItem("Branch", true, 1, [
-        new Paragraph(github.context.ref),
+        new DecoratedText(github.context.ref, {
+          startIcon: {
+            iconUrl: branchIconUrl,
+          },
+        }),
       ])
     );
 
@@ -62,7 +70,7 @@ export class ConstructCard {
       ),
     ]);
 
-    if(this.inputJson.asset_url) {
+    if (this.inputJson.asset_url) {
       buttonList.addButton(
         new Button(
           "Download APK",
@@ -80,11 +88,7 @@ export class ConstructCard {
         )
       );
     }
-    sections.addSectionItem(
-      new SectionItem("", false, 0, [
-        buttonList
-      ])
-    );
+    sections.addSectionItem(new SectionItem("", false, 0, [buttonList]));
 
     return sections.json();
   }
@@ -93,7 +97,7 @@ export class ConstructCard {
     return new Header(
       this.inputJson.header.title || github.context.repo.repo,
       this.inputJson.header.subtitle || "",
-      "https://developers.google.com/chat/images/quickstart-app-avatar.png",
+      "https://raw.githubusercontent.com/xseededucation/action_assets/master/29.webp",
       "CIRCLE"
     ).json();
   }
