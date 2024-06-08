@@ -1,6 +1,7 @@
 import * as core from "@actions/core";
 import axios from "axios";
 import { ConstructCard } from "./helpers/construct-card";
+import { GithubContext } from "./helpers/github/github-context";
 
 async function run() {
   try {
@@ -33,7 +34,9 @@ async function run() {
     };
 
     console.log(JSON.stringify(payload));
-    // await axios.post(webhookUrl, payload);
+    if(GithubContext.isGithubEnv) {
+      await axios.post(webhookUrl, payload);
+    }
     core.info("Notification sent successfully.");
   } catch (error: any) {
     core.setFailed(`Action failed with error: ${error}`);
