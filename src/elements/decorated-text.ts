@@ -54,8 +54,10 @@ export class DecoratedText implements CardElement {
       jsonToUse['bottomLabel'] = this.bottomLabel
     }
     return {
+      "decoratedText": { 
       ...jsonToUse,
-      text: this.text,
+      ...{text: this.text},
+      }
     }
   }
 }

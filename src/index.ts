@@ -33,7 +33,7 @@ async function run() {
     };
 
     console.log(JSON.stringify(payload));
-    await axios.post(webhookUrl, payload);
+    // await axios.post(webhookUrl, payload);
     core.info("Notification sent successfully.");
   } catch (error: any) {
     core.setFailed(`Action failed with error: ${error}`);

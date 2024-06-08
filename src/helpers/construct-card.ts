@@ -1,19 +1,21 @@
 import { Header } from "../elements/header";
-import * as github from "@actions/github";
 import { SectionItem, Sections } from "../elements/section";
 import { Paragraph } from "../elements/paragraph";
 import { ButtonList } from "../elements/button-list";
 import { Button } from "../elements/button";
 import { DecoratedText } from "../elements/decorated-text";
+import { GithubContext } from "./github/github-context";
 
 const branchIconUrl =
   "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
 
 export class ConstructCard {
   inputJson: Record<string, any>;
+  githubContext: GithubContext;
 
   constructor(inputJson: Record<string, any>) {
     this.inputJson = inputJson;
+    this.githubContext = new GithubContext();
   }
 
   get() {
@@ -33,26 +35,28 @@ export class ConstructCard {
 
     sections.addSectionItem(
       new SectionItem("Creator", true, 1, [
-        new Paragraph(this.inputJson.creator_name || github.context.actor),
+        new Paragraph(this.inputJson.creator_name || this.githubContext.actor()),
       ])
     );
 
     sections.addSectionItem(
       new SectionItem("Commit Id", true, 1, [
-        new Paragraph(this.inputJson.commit_id || github.context.sha),
+        new Paragraph(this.inputJson.commit_id || this.githubContext.sha()
+        ),
       ])
     );
 
+    const commitUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/commit/${this.githubContext.sha()}`;
+
     sections.addSectionItem(
       new SectionItem("Branch", true, 1, [
-        new DecoratedText(github.context.ref, {
+        new DecoratedText(`<a href="${commitUrl}">${this.githubContext.ref()}</a>`, {
           startIcon: {
             iconUrl: branchIconUrl,
           },
         }),
       ])
     );
-
     const buttonList = new ButtonList([
       new Button(
         "Open Repo",
@@ -64,7 +68,7 @@ export class ConstructCard {
         },
         {
           openLink: {
-            url: `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`,
+            url: `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}`,
           },
         }
       ),
@@ -95,7 +99,7 @@ export class ConstructCard {
 
   header(): Record<string, any> {
     return new Header(
-      this.inputJson.header.title || github.context.repo.repo,
+      this.inputJson.header.title || this.githubContext.repo(),
       this.inputJson.header.subtitle || "",
       "https://raw.githubusercontent.com/xseededucation/action_assets/master/29.webp",
       "CIRCLE"
