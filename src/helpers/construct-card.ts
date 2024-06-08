@@ -36,7 +36,6 @@ export class ConstructCard {
 
   getBodySections(): Record<string, any> {
     let sections: Sections = new Sections([]);
-    core.info(`this is the status ${this.inputJson.job_status}`);
     if (this.inputJson.job_status) {
       const jobStatus: string = this.inputJson.job_status;
       let decoratedText = new DecoratedText(

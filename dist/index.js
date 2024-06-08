@@ -192,33 +192,10 @@ exports.Sections = Sections;
 /***/ }),
 
 /***/ 3377:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ConstructCard = void 0;
 const header_1 = __nccwpck_require__(9938);
@@ -229,7 +206,6 @@ const button_1 = __nccwpck_require__(9993);
 const decorated_text_1 = __nccwpck_require__(4681);
 const github_context_1 = __nccwpck_require__(2973);
 const success_indication_1 = __nccwpck_require__(9252);
-const core = __importStar(__nccwpck_require__(2186));
 const branchIconUrl = "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
 class ConstructCard {
     constructor(inputJson) {
@@ -241,7 +217,6 @@ class ConstructCard {
     }
     getBodySections() {
         let sections = new section_1.Sections([]);
-        core.info(`this is the status ${this.inputJson.job_status}`);
         if (this.inputJson.job_status) {
             const jobStatus = this.inputJson.job_status;
             let decoratedText = new decorated_text_1.DecoratedText(`<font color="${success_indication_1.statusColor[jobStatus]}">${success_indication_1.statusMessage[jobStatus]}</font>`, {
@@ -485,7 +460,7 @@ function run() {
                                 subtitle: "NA",
                             },
                             creator_name: creator || "NA",
-                            asset_url: assetUrl || "NA",
+                            asset_url: assetUrl,
                             body: description || "NA",
                             job_status: jobStatus || "NA",
                             commit_id: commitId,

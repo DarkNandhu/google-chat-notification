@@ -23,7 +23,7 @@ async function run() {
                 subtitle: "NA",
               },
               creator_name: creator || "NA",
-              asset_url: assetUrl || "NA",
+              asset_url: assetUrl,
               body: description || "NA",
               job_status: jobStatus || "NA",
               commit_id: commitId,
