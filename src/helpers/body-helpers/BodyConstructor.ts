@@ -33,6 +33,7 @@ export class BodyConstructor {
     this.addCreator();
     this.addCommitSection();
     this.addBranchInfo();
+    this.addButtons();
 
     return this.sections.json();
   }
