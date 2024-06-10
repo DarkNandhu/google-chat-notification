@@ -27,7 +27,7 @@ export class GithubContext {
     if(GithubContext.isGithubEnv) {
       return this.githubContext.sha
     }
-    return "12345"
+    return "1234567890"
    }
    ref(): string {
     if(GithubContext.isGithubEnv) {
