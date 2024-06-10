@@ -107,7 +107,7 @@ export class BodyConstructor {
       new SectionItem("Commit Id", true, 1, [
         new Paragraph(
           `<a style="text-decoration: none; color: red;" href=${commitUrl}>${
-            this.inputJson.commit_id.substring(0, 7) || this.githubContext.sha().substring(0, 7)
+            this.inputJson.commit_id.substring(0, 8) || this.githubContext.sha().substring(0, 7)
           }</a>`
         ),
       ])
