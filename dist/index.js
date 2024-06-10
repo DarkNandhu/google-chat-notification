@@ -272,7 +272,7 @@ class BodyConstructor {
             commitUrl = "https://xseededucation.com";
         }
         this.sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id.substring(0, 8) || this.githubContext.sha().substring(0, 7)}</a>`),
+            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id.substring(0, 8) || this.githubContext.sha().substring(0, 8)}</a>`),
         ]));
     }
     addCreator() {
