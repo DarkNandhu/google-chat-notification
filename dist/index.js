@@ -191,72 +191,36 @@ exports.Sections = Sections;
 
 /***/ }),
 
-/***/ 3377:
+/***/ 8421:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ConstructCard = void 0;
-const header_1 = __nccwpck_require__(9938);
-const section_1 = __nccwpck_require__(6430);
-const paragraph_1 = __nccwpck_require__(6465);
-const button_list_1 = __nccwpck_require__(4160);
+exports.BodyConstructor = void 0;
 const button_1 = __nccwpck_require__(9993);
+const button_list_1 = __nccwpck_require__(4160);
 const decorated_text_1 = __nccwpck_require__(4681);
+const paragraph_1 = __nccwpck_require__(6465);
+const section_1 = __nccwpck_require__(6430);
 const github_context_1 = __nccwpck_require__(2973);
 const success_indication_1 = __nccwpck_require__(9252);
 const branchIconUrl = "https://raw.githubusercontent.com/xseededucation/action_assets/master/git-branch-128.png";
-class ConstructCard {
-    constructor(inputJson) {
+class BodyConstructor {
+    constructor(inputJson, githubContext) {
+        this.sections = new section_1.Sections([]);
         this.inputJson = inputJson;
-        this.githubContext = new github_context_1.GithubContext();
+        this.githubContext = githubContext;
     }
-    get() {
-        return Object.assign(Object.assign({}, this.header()), this.getBodySections());
+    process() {
+        this.addJobStatus();
+        this.addBody();
+        this.addCreator();
+        this.addCommitSection();
+        this.addBranchInfo();
+        return this.sections.json();
     }
-    getBodySections() {
-        let sections = new section_1.Sections([]);
-        if (this.inputJson.job_status) {
-            const jobStatus = this.inputJson.job_status;
-            let decoratedText = new decorated_text_1.DecoratedText(`<font color="${success_indication_1.statusColor[jobStatus]}">${success_indication_1.statusMessage[jobStatus]}</font>`, {
-                startIcon: {
-                    iconUrl: success_indication_1.statusImage[jobStatus],
-                },
-            });
-            sections.addSectionItem(new section_1.SectionItem("Status", false, 0, [decoratedText]));
-        }
-        if (this.inputJson.body) {
-            let paragraph = new paragraph_1.Paragraph(this.inputJson.body);
-            sections.addSectionItem(new section_1.SectionItem("Description", false, 0, [paragraph]));
-        }
-        sections.addSectionItem(new section_1.SectionItem("Creator", true, 1, [
-            new paragraph_1.Paragraph(this.inputJson.creator_name || this.githubContext.actor()),
-        ]));
-        let commitUrl = "";
-        if (github_context_1.GithubContext.isGithubEnv) {
-            commitUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/commit/${this.githubContext.sha()}`;
-        }
-        else {
-            commitUrl = "https://xseededucation.com";
-        }
-        sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
-        ]));
-        let branchUrl = "";
-        if (github_context_1.GithubContext.isGithubEnv) {
-            branchUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/tree/${this.githubContext.ref()}`;
-        }
-        else {
-            branchUrl = "https://xseededucation.com";
-        }
-        sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
-            new decorated_text_1.DecoratedText(`<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref()}</a>`, {
-                startIcon: {
-                    iconUrl: branchIconUrl,
-                },
-            }),
-        ]));
+    addButtons() {
         const buttonList = new button_list_1.ButtonList([
             new button_1.Button("Open Repo", {
                 red: 0.5,
@@ -281,8 +245,84 @@ class ConstructCard {
                 },
             }));
         }
-        sections.addSectionItem(new section_1.SectionItem("", false, 0, [buttonList]));
-        return sections.json();
+        this.sections.addSectionItem(new section_1.SectionItem("", false, 0, [buttonList]));
+    }
+    addBranchInfo() {
+        let branchUrl = "";
+        if (github_context_1.GithubContext.isGithubEnv) {
+            branchUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/tree/${this.githubContext.ref()}`;
+        }
+        else {
+            branchUrl = "https://xseededucation.com";
+        }
+        this.sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
+            new decorated_text_1.DecoratedText(`<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref().substring(0, 7)}</a>`, {
+                startIcon: {
+                    iconUrl: branchIconUrl,
+                },
+            }),
+        ]));
+    }
+    addCommitSection() {
+        let commitUrl = "";
+        if (github_context_1.GithubContext.isGithubEnv) {
+            commitUrl = `https://github.com/${this.githubContext.owner()}/${this.githubContext.repo()}/commit/${this.githubContext.sha()}`;
+        }
+        else {
+            commitUrl = "https://xseededucation.com";
+        }
+        this.sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
+            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
+        ]));
+    }
+    addCreator() {
+        this.sections.addSectionItem(new section_1.SectionItem("Creator", true, 1, [
+            new paragraph_1.Paragraph(this.inputJson.creator_name || this.githubContext.actor()),
+        ]));
+    }
+    addBody() {
+        if (this.inputJson.body) {
+            let paragraph = new paragraph_1.Paragraph(this.inputJson.body);
+            this.sections.addSectionItem(new section_1.SectionItem("Description", false, 0, [paragraph]));
+        }
+    }
+    addJobStatus() {
+        if (this.inputJson.job_status) {
+            const jobStatus = this.inputJson.job_status;
+            let decoratedText = new decorated_text_1.DecoratedText(`<font color="${success_indication_1.statusColor[jobStatus]}">${success_indication_1.statusMessage[jobStatus]}</font>`, {
+                startIcon: {
+                    iconUrl: success_indication_1.statusImage[jobStatus],
+                },
+            });
+            this.sections.addSectionItem(new section_1.SectionItem("Status", false, 0, [decoratedText]));
+        }
+    }
+}
+exports.BodyConstructor = BodyConstructor;
+
+
+/***/ }),
+
+/***/ 3377:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConstructCard = void 0;
+const header_1 = __nccwpck_require__(9938);
+const github_context_1 = __nccwpck_require__(2973);
+const BodyConstructor_1 = __nccwpck_require__(8421);
+class ConstructCard {
+    constructor(inputJson) {
+        this.inputJson = inputJson;
+        this.githubContext = new github_context_1.GithubContext();
+    }
+    get() {
+        return Object.assign(Object.assign({}, this.header()), this.getBodySections());
+    }
+    getBodySections() {
+        return new BodyConstructor_1.BodyConstructor(this.inputJson, this.githubContext).process();
     }
     header() {
         return new header_1.Header(this.inputJson.header.title || this.githubContext.repo(), this.inputJson.header.subtitle || "", "https://raw.githubusercontent.com/xseededucation/action_assets/master/29.webp", "CIRCLE").json();
