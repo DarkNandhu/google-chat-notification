@@ -256,7 +256,7 @@ class BodyConstructor {
             branchUrl = "https://xseededucation.com";
         }
         this.sections.addSectionItem(new section_1.SectionItem("Branch", true, 1, [
-            new decorated_text_1.DecoratedText(`<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref().substring(0, 7)}</a>`, {
+            new decorated_text_1.DecoratedText(`<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref()}</a>`, {
                 startIcon: {
                     iconUrl: branchIconUrl,
                 },
@@ -272,7 +272,7 @@ class BodyConstructor {
             commitUrl = "https://xseededucation.com";
         }
         this.sections.addSectionItem(new section_1.SectionItem("Commit Id", true, 1, [
-            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id || this.githubContext.sha()}</a>`),
+            new paragraph_1.Paragraph(`<a style="text-decoration: none; color: red;" href=${commitUrl}>${this.inputJson.commit_id.substring(0, 7) || this.githubContext.sha().substring(0, 7)}</a>`),
         ]));
     }
     addCreator() {
@@ -387,7 +387,7 @@ class GithubContext {
         if (GithubContext.isGithubEnv) {
             return this.githubContext.sha;
         }
-        return "12345";
+        return "1234567890";
     }
     ref() {
         if (GithubContext.isGithubEnv) {

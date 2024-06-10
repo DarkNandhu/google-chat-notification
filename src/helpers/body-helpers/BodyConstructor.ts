@@ -85,7 +85,7 @@ export class BodyConstructor {
     this.sections.addSectionItem(
       new SectionItem("Branch", true, 1, [
         new DecoratedText(
-          `<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref().substring(0, 7)}</a>`,
+          `<a style="text-decoration: none; color: red;" href=${branchUrl}>${this.githubContext.ref()}</a>`,
           {
             startIcon: {
               iconUrl: branchIconUrl,
@@ -107,7 +107,7 @@ export class BodyConstructor {
       new SectionItem("Commit Id", true, 1, [
         new Paragraph(
           `<a style="text-decoration: none; color: red;" href=${commitUrl}>${
-            this.inputJson.commit_id || this.githubContext.sha()
+            this.inputJson.commit_id.substring(0, 7) || this.githubContext.sha().substring(0, 7)
           }</a>`
         ),
       ])
